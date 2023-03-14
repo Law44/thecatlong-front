@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+.navbar{
+  margin: 30px;
+}
+
+strong{
+  margin-left: 30px;
+}
+
+.input-group{
+  margin-left: 30px;
+}
+
+#searchBox{
+  margin-left: 20px;
+}
