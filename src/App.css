@@ -39,6 +39,7 @@
 
 .navbar{
   margin: 30px;
+  margin-right: 100px;
 }
 
 strong{
@@ -51,4 +52,20 @@ strong{
 
 #searchBox{
   margin-left: 20px;
+}
+
+#navbarNav{
+  margin-left: 30px;
+}
+
+.card-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #bbb;
+  margin-right: 5px;
+}
+
+.card-indicator.active {
+  background-color: #333;
 }
