@@ -3,7 +3,7 @@ import { useNavigate, useLocation, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import logo from '../assets/logo.png';
 import '../App.css';
-import { FaSearch, FaShoppingCart } from 'react-icons/fa';
+import { FaSearch, FaShoppingCart, FaUser } from 'react-icons/fa';
 
 export default function NavBar() {
   const navigate = useNavigate();
@@ -13,8 +13,8 @@ export default function NavBar() {
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchText.trim()) {
-      if (location.pathname === '/') {
-        return navigate(`products?text=${searchText}`);
+      if (location.pathname !== '/products') {
+        return navigate(`/products?text=${searchText}`);
       }
       else {
         return navigate(`?text=${searchText}`);
@@ -43,27 +43,27 @@ export default function NavBar() {
         <ul className="navbar-nav mr-auto w-100">
           <li className="nav-item flex-grow-1">
             <Link to="/" className="nav-link">
-              <strong>Home</strong>
+              <strong>Inicio</strong>
             </Link>
           </li>
           <li className="nav-item flex-grow-1">
             <Link to="/products" className="nav-link">
-              <strong>Products</strong>
+              <strong>Productos</strong>
             </Link>
           </li>
           <li className="nav-item flex-grow-1">
             <Link to="/sports" className="nav-link">
-              <strong>Sports</strong>
+              <strong>Deportes</strong>
             </Link>
           </li>
           <li className="nav-item flex-grow-1">
             <Link to="/about" className="nav-link">
-              <strong>About Us</strong>
+              <strong>Sobre Nosotros</strong>
             </Link>
           </li>
           <li className="nav-item flex-grow-1">
             <Link to="/contact" className="nav-link">
-              <strong>Contact Us</strong>
+              <strong>Contacto</strong>
             </Link>
           </li>
         </ul>
@@ -72,7 +72,7 @@ export default function NavBar() {
             <input
               type="text"
               className="form-control"
-              placeholder="Search"
+              placeholder="Buscar"
               aria-label="Search"
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
@@ -83,7 +83,12 @@ export default function NavBar() {
               </button>
             </div>
           </div>
-        </form>
+        </form>        
+        <Link to="/user" className="nav-link" style={{ marginLeft: '5%' }}>
+          <i className="fa fa-user fa-lg">
+            <FaUser />
+          </i>
+        </Link>
         <Link to="/cart" className="nav-link" style={{ marginLeft: '5%' }}>
           <i className="fa fa-shopping-cart fa-lg">
             <FaShoppingCart />

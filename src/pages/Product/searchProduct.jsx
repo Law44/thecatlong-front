@@ -51,7 +51,7 @@ export default function Search() {
                         {filteredItems.map(item => (
                             <div className="col-md-4 mb-4" key={item.id}>
                                 <Card style={{ width: '18rem' }}>
-                                    <Card.Img variant="top" src={banner} />
+                                    <Card.Img variant="top" src={item.urlImagen} />
                                     <Card.Body>
                                         <Card.Title>{item.nombre}</Card.Title>
                                         <Card.Text>{item.descripcion} ({item.deporte.nombre})</Card.Text>
