@@ -25,7 +25,6 @@ export default function Search() {
         axios
             .get(url)
             .then(response => {
-                console.log(response.data);
                 setItems(response.data);
             })
             .catch(error => {
@@ -38,7 +37,7 @@ export default function Search() {
     }, [items]);
 
     return (
-        <div>
+        <div className='background'>
             <NavBar />
             <div className="container">
                 {filteredItems.length === 0 ? (
@@ -47,20 +46,24 @@ export default function Search() {
                         <img src={error}></img>
                     </div>
                 ) : (
-                    <div className="row">
-                        {filteredItems.map(item => (
-                            <div className="col-md-4 mb-4" key={item.id}>
-                                <Card style={{ width: '18rem' }}>
-                                    <Card.Img variant="top" src={item.urlImagen} />
-                                    <Card.Body>
-                                        <Card.Title>{item.nombre}</Card.Title>
-                                        <Card.Text>{item.descripcion} ({item.deporte.nombre})</Card.Text>
-                                        <Card.Text>{item.precio} €</Card.Text>
-                                        <Button variant="primary">Comprar</Button>
-                                    </Card.Body>
-                                </Card>
-                            </div>
-                        ))}
+                    <div style={{ height: '800px', overflow: 'auto', width: 'auto', overflowX: 'hidden' }}>
+                        <h2>Productos</h2>
+                        <br></br>
+                        <div className="row">
+                            {filteredItems.map(item => (
+                                <div className="col-md-4 mb-4" key={item.id}>
+                                    <Card style={{ width: '18rem' }}>
+                                        <Card.Img variant="top" src={item.urlImagen} />
+                                        <Card.Body>
+                                            <Card.Title>{item.nombre}</Card.Title>
+                                            <Card.Text>{item.descripcion} ({item.deporte.nombre})</Card.Text>
+                                            <Card.Text>{item.precio} €</Card.Text>
+                                            <Button variant="primary">Comprar</Button>
+                                        </Card.Body>
+                                    </Card>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 )}
             </div>

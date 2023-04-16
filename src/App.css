@@ -32,29 +32,30 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
 
-.navbar{
+.navbar {
   margin: 30px;
   margin-right: 100px;
 }
 
-strong{
+strong {
   margin-left: 30px;
 }
 
-.input-group{
+.input-group {
   margin-left: 30px;
 }
 
-#searchBox{
+#searchBox {
   margin-left: 20px;
 }
 
-#navbarNav{
+#navbarNav {
   margin-left: 30px;
 }
 
@@ -70,16 +71,58 @@ strong{
   background-color: #333;
 }
 
-h2, h3 {
+h2,
+h3 {
   font-size: 72px;
   background: linear-gradient(to right, #0EB2C1, #30365B);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-} 
+}
 
 .modal {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  max-height: 400px;
+  margin: 0 auto;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.table thead th {
+  font-weight: bold;
+  border-bottom: 2px solid #ddd;
+}
+
+.table tbody td {
+  border-bottom: 1px solid #ddd;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.table tbody tr:hover {
+  background-color: #e6f7ff;
+}
+
+.background, html {
+  background-color: #F6F6F6;
+}
+
+.container{
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 5px;
 }

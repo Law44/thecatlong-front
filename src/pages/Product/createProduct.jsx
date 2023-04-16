@@ -1,15 +1,14 @@
 import NavBar from '../../components/NavBar';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
 
 export default function Create() {
     const navigate = useNavigate();
-
-    const [formData, setFormData] = useState({
+    const initialFormData = {
         nombre: '',
         stock: 0,
         descripcion: '',
@@ -18,7 +17,34 @@ export default function Create() {
         precio: 0,
         descuento: 0,
         tipologiaProductoId: 0
-    });
+    };
+
+    const [formData, setFormData] = useState(initialFormData);
+    const [modalMessage, setModalMessage] = useState("");
+    const [button, setButton] = useState("");
+    const { id } = useParams();
+
+    useEffect(() => {
+        if (id) {
+            fetchProduct(id);
+            setModalMessage("El producto ha sido modificado exitosamente");
+            setButton("Editar");
+        } else {
+            setFormData(initialFormData);
+            setModalMessage("El producto ha sido creado exitosamente");
+            setButton("Crear");
+        }
+    }, [id]);
+
+    const fetchProduct = async (id) => {
+        try {
+            const response = await fetch(`http://localhost:8081/api/v1/producto/${id}`);
+            const data = await response.json();
+            setFormData(data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     const [setShowModal, setModalIsOpen] = useState(false);
 
@@ -29,17 +55,25 @@ export default function Create() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+
         const parsedFormData = {
             ...formData,
             stock: parseInt(formData.stock),
-            deporteId: parseInt(formData.deporteId),
+            deporteId: selecteSport,
             precio: parseInt(formData.precio),
             descuento: parseInt(formData.descuento),
-            tipologiaProductoId: parseInt(formData.tipologiaProductoId)
-          }
-        axios.post('http://localhost:8081/api/v1/producto', parsedFormData)
-            .then(() => setModalIsOpen(true))
-            .catch(error => console.log(error));
+            tipologiaProductoId: selectedType
+        }
+        if (id) {
+            axios.post(`http://localhost:8081/api/v1/producto/${id}`, parsedFormData)
+                .then(() => setModalIsOpen(true))
+                .catch(error => console.log(error));
+        }
+        else {
+            axios.post('http://localhost:8081/api/v1/producto', parsedFormData)
+                .then(() => setModalIsOpen(true))
+                .catch(error => console.log(error));
+        }
     };
 
     const handleModalOk = () => {
@@ -79,7 +113,7 @@ export default function Create() {
     };
 
     return (
-        <div>
+        <div className="background">
             <NavBar />
             <div className="container">
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', padding: '2rem' }}>
@@ -127,7 +161,7 @@ export default function Create() {
                                 ))}
                             </select>
                         </div>
-                        <button type="submit" style={{ padding: '0.5rem 1rem', fontSize: '1rem', marginTop: '2rem' }}>Crear</button>
+                        <button type="submit" style={{ padding: '0.5rem 1rem', fontSize: '1rem', marginTop: '2rem' }}>{button}</button>
                     </form>
                 </div>
             </div>
@@ -149,7 +183,7 @@ export default function Create() {
                 }}
             >
                 <div>
-                    <p>El producto ha sido creado exitosamente</p>
+                    <p>{modalMessage}</p>
                     <button onClick={handleModalOk} style={{ marginLeft: '80%' }}>OK</button>
                 </div>
             </Modal>

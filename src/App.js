@@ -14,9 +14,11 @@ function App() {
       <Route path="/" element={<HomePage />} />
       <Route path="/products" element={<SearchProductPage />} />
       <Route path="/products/create" element={<CreateProductPage />} />
+      <Route path="/products/create/:id" element={<CreateProductPage />} />
       <Route path="/products/list" element={<ListProductPage />} />
       <Route path="/user" element={<UserPage />} />
       <Route path="/user/create" element={<CreateUserPage />} />
+      <Route path="/user/create/:id" element={<CreateUserPage />} />
       <Route path="/user/list" element={<ListUserPage />} />
     </Routes>
   );
