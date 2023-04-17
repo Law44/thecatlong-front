@@ -3,8 +3,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FaPencilAlt, FaEye } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import CircleBackground from '../../components/CircleBackground';
+import { useNavigate } from 'react-router-dom';
 
 export default function List() {
+    const navigate = useNavigate();
     const [objectList, setObjectList] = useState([]);
 
     useEffect(() => {
@@ -16,9 +19,10 @@ export default function List() {
 
     return (
         <div className="background">
+            <CircleBackground />
             <NavBar />
+            <h2 style={{marginLeft: "7%"}}>Lista de productos</h2>
             <div className="container">
-                <h2>Lista de productos</h2>
                 <br></br>
                 <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                     <div className="table-wrapper">
@@ -68,6 +72,7 @@ export default function List() {
                     </div>
                 </div>
             </div>
+            <button onClick={() => navigate(`/products/create`)} style={{ marginLeft: '80%', marginTop: '1%', borderRadius: '20px' }}>Crear producto</button>
         </div>
     );
 }

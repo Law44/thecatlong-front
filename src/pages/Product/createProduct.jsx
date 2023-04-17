@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import Modal from 'react-modal';
+import CircleBackground from '../../components/CircleBackground';
 
 Modal.setAppElement('#root');
 
@@ -41,6 +42,8 @@ export default function Create() {
             const response = await fetch(`http://localhost:8081/api/v1/producto/${id}`);
             const data = await response.json();
             setFormData(data);
+            setSelectedSport(data.deporteId);
+            setSelectedType(data.tipologiaProductoId);
         } catch (error) {
             console.log(error);
         }
@@ -114,10 +117,12 @@ export default function Create() {
 
     return (
         <div className="background">
+            <CircleBackground />
             <NavBar />
+            <h2 style={{marginLeft: "7%"}}>Nuevo producto</h2>
+
             <div className="container">
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', padding: '2rem' }}>
-                    <h2>Nuevo producto</h2>
                     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', maxWidth: '600px' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem' }}>
                             <label htmlFor="nombre">Nombre:</label>

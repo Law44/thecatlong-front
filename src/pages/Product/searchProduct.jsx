@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import banner from '../../assets/banner-test.jpg';
 import error from '../../assets/error.JPG';
+import CircleBackground from '../../components/CircleBackground';
 
 export default function Search() {
     const location = useLocation();
@@ -38,7 +39,9 @@ export default function Search() {
 
     return (
         <div className='background'>
+            <CircleBackground />
             <NavBar />
+            <h2 style={{ marginLeft: "7%" }}>Productos</h2>
             <div className="container">
                 {filteredItems.length === 0 ? (
                     <div className="text-center mt-5">
@@ -46,8 +49,7 @@ export default function Search() {
                         <img src={error}></img>
                     </div>
                 ) : (
-                    <div style={{ height: '800px', overflow: 'auto', width: 'auto', overflowX: 'hidden' }}>
-                        <h2>Productos</h2>
+                    <div style={{ height: '800px', width: 'auto' }}>
                         <br></br>
                         <div className="row">
                             {filteredItems.map(item => (

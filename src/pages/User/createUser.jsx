@@ -3,8 +3,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import Modal from 'react-modal';
+import CircleBackground from '../../components/CircleBackground';
 
-Modal.setAppElement('#root'); 
+Modal.setAppElement('#root');
 
 export default function Create() {
     const navigate = useNavigate();
@@ -16,7 +17,7 @@ export default function Create() {
         email: '',
         password: ''
     };
-    
+
     const [formData, setFormData] = useState(initialFormData);
     const [modalMessage, setModalMessage] = useState("");
     const [button, setButton] = useState("");
@@ -38,13 +39,16 @@ export default function Create() {
         try {
             const response = await fetch(`http://localhost:8081/api/v1/usuario/${id}`);
             const data = await response.json();
-            setFormData(data);
+            console.log(data.roles[0]);
+            setFormData({ ...data, password: "" });
+            setSelectedRole(data.roles[0]);
         } catch (error) {
             console.log(error);
         }
     };
 
     const [setShowModal, setModalIsOpen] = useState(false);
+    const [selectedRole, setSelectedRole] = useState('');
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -54,10 +58,18 @@ export default function Create() {
     const handleSubmit = (event) => {
         event.preventDefault();
         const { password, ...data } = formData;
-        const payload = { ...data, password: btoa(password), roles: [formData.role] };
-        axios.post('http://localhost:8081/api/v1/usuario', payload)
+        const payload = { ...data, password: btoa(password), roles: [selectedRole] };
+        console.log(payload);
+        if (id){
+            axios.post(`http://localhost:8081/api/v1/usuario/${id}`, payload)
             .then(() => setModalIsOpen(true))
             .catch(error => console.log(error));
+        }
+        else {
+            axios.post('http://localhost:8081/api/v1/usuario', payload)
+            .then(() => setModalIsOpen(true))
+            .catch(error => console.log(error));
+        }       
     };
 
     const handleModalOk = () => {
@@ -65,12 +77,17 @@ export default function Create() {
         navigate(`/user`);
     }
 
+    const handleSelectChangeRole = (event) => {
+        setSelectedRole(event.target.value);
+    };
+
     return (
         <div className="background">
+            <CircleBackground/>
             <NavBar />
+            <h2 style={{marginLeft: "7%"}}>Nuevo usuario</h2>
             <div className="container">
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', padding: '2rem' }}>
-                    <h2>Nuevo usuario</h2>
                     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', maxWidth: '600px' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem' }}>
                             <label htmlFor="nombre">Nombre:</label>
@@ -96,7 +113,8 @@ export default function Create() {
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem' }}>
                             <label htmlFor="role">Rol:</label>
-                            <select id="role" name="role" value={formData.role} onChange={handleInputChange}>
+                            <select id="role" name="role" value={selectedRole} onChange={handleSelectChangeRole}>
+                                <option value="">-- Selecciona un rol --</option>
                                 <option value="buyer">Comprador</option>
                                 <option value="admin">Admin</option>
                             </select>
@@ -124,7 +142,7 @@ export default function Create() {
             >
                 <div>
                     <p>{modalMessage}</p>
-                    <button onClick={handleModalOk} style={{ marginLeft: '80%'}}>OK</button>
+                    <button onClick={handleModalOk} style={{ marginLeft: '80%' }}>OK</button>
                 </div>
             </Modal>
         </div>
