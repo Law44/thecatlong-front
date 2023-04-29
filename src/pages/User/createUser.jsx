@@ -59,7 +59,6 @@ export default function Create() {
         event.preventDefault();
         const { password, ...data } = formData;
         const payload = { ...data, password: btoa(password), roles: [selectedRole] };
-        console.log(payload);
         if (id){
             axios.post(`http://localhost:8081/api/v1/usuario/${id}`, payload)
             .then(() => setModalIsOpen(true))

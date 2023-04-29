@@ -115,6 +115,8 @@ export default function User() {
 
 
                             <button type="submit" style={{ padding: '0.5rem 1rem', fontSize: '1rem', marginTop: '2rem', width: '350px', borderRadius: '20px' }}>Iniciar sesión</button>
+                            <br></br>
+                            <p style={{ color: '#0EB2C1'}}>No tienes una cuenta? <Link to="/user/signUp">Registrate ahora!</Link></p>
                         </form>
                     </div>
 

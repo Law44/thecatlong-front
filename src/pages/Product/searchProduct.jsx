@@ -1,9 +1,8 @@
 import NavBar from '../../components/NavBar';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { Card, Button } from 'react-bootstrap';
-import banner from '../../assets/banner-test.jpg';
 import error from '../../assets/error.JPG';
 import CircleBackground from '../../components/CircleBackground';
 
@@ -60,7 +59,9 @@ export default function Search() {
                                             <Card.Title>{item.nombre}</Card.Title>
                                             <Card.Text>{item.descripcion} ({item.deporte.nombre})</Card.Text>
                                             <Card.Text>{item.precio} €</Card.Text>
-                                            <Button variant="primary">Comprar</Button>
+                                            <Link to={`/products/${item.id}`} className="nav-link" style={{ marginLeft: '5%' }}>
+                                                <Button variant="primary">Comprar</Button>
+                                            </Link>
                                         </Card.Body>
                                     </Card>
                                 </div>
