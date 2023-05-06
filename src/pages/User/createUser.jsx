@@ -59,16 +59,16 @@ export default function Create() {
         event.preventDefault();
         const { password, ...data } = formData;
         const payload = { ...data, password: btoa(password), roles: [selectedRole] };
-        if (id){
+        if (id) {
             axios.post(`http://localhost:8081/api/v1/usuario/${id}`, payload)
-            .then(() => setModalIsOpen(true))
-            .catch(error => console.log(error));
+                .then(() => setModalIsOpen(true))
+                .catch(error => console.log(error));
         }
         else {
             axios.post('http://localhost:8081/api/v1/usuario', payload)
-            .then(() => setModalIsOpen(true))
-            .catch(error => console.log(error));
-        }       
+                .then(() => setModalIsOpen(true))
+                .catch(error => console.log(error));
+        }
     };
 
     const handleModalOk = () => {
@@ -82,44 +82,40 @@ export default function Create() {
 
     return (
         <div className="background">
-            <CircleBackground/>
+            <CircleBackground />
             <NavBar />
-            <h2 style={{marginLeft: "7%"}}>Nuevo usuario</h2>
             <div className="container">
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', padding: '2rem' }}>
-                    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', maxWidth: '600px' }}>
-                        <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem' }}>
-                            <label htmlFor="nombre">Nombre:</label>
-                            <input type="text" id="nombre" name="nombre" value={formData.nombre} onChange={handleInputChange} required />
-                        </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem' }}>
+                <h2 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '2rem' }}>Añadir usuario</h2>
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '2rem', marginTop: '-90px' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', padding: '2rem' }}>
+                        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', maxWidth: '600px' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem', width: '500px' }}>
+                                <input type="text" id="nombre" name="nombre" value={formData.nombre} onChange={handleInputChange} required style={{ padding: '0.5rem', fontSize: '1rem', borderRadius: '5px', backgroundColor: '#0EB2C1' }} placeholder="Nombre" />
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem', width: '500px' }}>
 
-                            <label htmlFor="apellido1">Primer apellido:</label>
-                            <input type="text" id="apellido1" name="apellido1" value={formData.apellido1} onChange={handleInputChange} required />
-                        </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem' }}>
+                                <input type="text" id="apellido1" name="apellido1" value={formData.apellido1} onChange={handleInputChange} required style={{ padding: '0.5rem', fontSize: '1rem', borderRadius: '5px', backgroundColor: '#0EB2C1' }} placeholder="Primer Apellido" />
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem', width: '500px' }}>
 
-                            <label htmlFor="apellido2">Segundo apellido:</label>
-                            <input type="text" id="apellido2" name="apellido2" value={formData.apellido2} onChange={handleInputChange} />
-                        </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem' }}>
-                            <label htmlFor="email">Email:</label>
-                            <input type="email" id="email" name="email" value={formData.email} onChange={handleInputChange} required />
-                        </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem' }}>
-                            <label htmlFor="password">Contraseña:</label>
-                            <input type="password" id="password" name="password" value={formData.password} onChange={handleInputChange} required />
-                        </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem' }}>
-                            <label htmlFor="role">Rol:</label>
-                            <select id="role" name="role" value={selectedRole} onChange={handleSelectChangeRole}>
-                                <option value="">-- Selecciona un rol --</option>
-                                <option value="buyer">Comprador</option>
-                                <option value="admin">Admin</option>
-                            </select>
-                        </div>
-                        <button type="submit" style={{ padding: '0.5rem 1rem', fontSize: '1rem', marginTop: '2rem' }}>{button}</button>
-                    </form>
+                                <input type="text" id="apellido2" name="apellido2" value={formData.apellido2} onChange={handleInputChange} style={{ padding: '0.5rem', fontSize: '1rem', borderRadius: '5px', backgroundColor: '#0EB2C1' }} placeholder="Segundo Apellido" />
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem', width: '500px' }}>
+                                <input type="email" id="email" name="email" value={formData.email} onChange={handleInputChange} required style={{ padding: '0.5rem', fontSize: '1rem', borderRadius: '5px', backgroundColor: '#41738D' }} placeholder="Email" />
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem', width: '500px' }}>
+                                <input type="password" id="password" name="password" value={formData.password} onChange={handleInputChange} required style={{ padding: '0.5rem', fontSize: '1rem', borderRadius: '5px', backgroundColor: '#41738D' }} placeholder="Contraseña" />
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem', width: '500px' }}>
+                                <select id="role" name="role" value={selectedRole} onChange={handleSelectChangeRole} style={{ padding: '0.5rem', fontSize: '1rem', borderRadius: '5px', backgroundColor: '#41738D' }}>
+                                    <option value="">-- Selecciona un rol --</option>
+                                    <option value="buyer">Comprador</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                            </div>
+                            <button type="submit" style={{ padding: '0.5rem 1rem', fontSize: '1rem', marginTop: '2rem', backgroundColor: '#30365B', color: 'white' }}>{button}</button>
+                        </form>
+                    </div>
                 </div>
             </div>
             <Modal

@@ -119,55 +119,55 @@ export default function Create() {
         <div className="background">
             <CircleBackground />
             <NavBar />
-            <h2 style={{marginLeft: "7%"}}>Nuevo producto</h2>
 
             <div className="container">
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', padding: '2rem' }}>
-                    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', maxWidth: '600px' }}>
-                        <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem' }}>
-                            <label htmlFor="nombre">Nombre:</label>
-                            <input type="text" id="nombre" name="nombre" value={formData.nombre} onChange={handleInputChange} required />
-                        </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem' }}>
+                <h2 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '2rem' }}>Añadir producto</h2>
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '2rem', marginTop: '-90px' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', padding: '2rem' }}>
+                        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', maxWidth: '600px' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem', width: '500px' }}>
+                                <input type="text" id="nombre" name="nombre" value={formData.nombre} onChange={handleInputChange} required style={{ padding: '0.5rem', fontSize: '1rem', borderRadius: '5px', backgroundColor: '#0EB2C1' }} placeholder="Nombre" />
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem', width: '500px' }}>
+                                <input type="text" id="descripcion" name="descripcion" value={formData.descripcion} onChange={handleInputChange} style={{ padding: '0.5rem', fontSize: '1rem', borderRadius: '5px', backgroundColor: '#0EB2C1', height: '100px' }} placeholder="Descripcion" />
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'row', width: '500px' }}>
+                                <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem' }}>
+                                    <label htmlFor="precio">Precio</label>
+                                    <input type="number" id="precio" name="precio" value={formData.precio} onChange={handleInputChange} required placeholder="precio" style={{ padding: '0.5rem', fontSize: '1rem', borderRadius: '5px', backgroundColor: '#41738D' }}/>
+                                </div>
+                                <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem', marginLeft: "20%" }}>
+                                    <label htmlFor="stock">Stock</label>
+                                    <input type="text" id="stock" name="stock" value={formData.stock} onChange={handleInputChange} required placeholder="Numero de unidades" style={{ padding: '0.5rem', fontSize: '1rem', borderRadius: '5px', backgroundColor: '#41738D' }}/>
+                                </div>
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem' }}>
+                                <input type="url" id="urlImagen" name="urlImagen" placeholder='URL imagen' value={formData.urlImagen} onChange={handleInputChange} required style={{ padding: '0.5rem', fontSize: '1rem', borderRadius: '5px', backgroundColor: '#41738D' }}/>
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem' }}>
+                                <select id="deporteId" value={selecteSport} onChange={handleSelectChangeSport} style={{ padding: '0.5rem', fontSize: '1rem', borderRadius: '5px', backgroundColor: '#30365B' }}>
+                                    <option value="">-- Selecciona un deporte --</option>
+                                    {sports.map(item => (
+                                        <option key={item.id} value={item.id}>{item.nombre}</option>
+                                    ))}
+                                </select>
+                            </div>
 
-                            <label htmlFor="stock">Stock:</label>
-                            <input type="text" id="stock" name="stock" value={formData.stock} onChange={handleInputChange} required />
-                        </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem' }}>
-                            <label htmlFor="descripcion">Descripción:</label>
-                            <input type="text" id="descripcion" name="descripcion" value={formData.descripcion} onChange={handleInputChange} />
-                        </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem' }}>
-                            <label htmlFor="urlImagen">Imagen:</label>
-                            <input type="url" id="urlImagen" name="urlImagen" value={formData.urlImagen} onChange={handleInputChange} required />
-                        </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem' }}>
-                            <label htmlFor="deporteId">Deporte:</label>
-                            <select id="deporteId" value={selecteSport} onChange={handleSelectChangeSport}>
-                                <option value="">-- Selecciona un deporte --</option>
-                                {sports.map(item => (
-                                    <option key={item.id} value={item.id}>{item.nombre}</option>
-                                ))}
-                            </select>
-                        </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem' }}>
-                            <label htmlFor="precio">Precio:</label>
-                            <input type="number" id="precio" name="precio" value={formData.precio} onChange={handleInputChange} required />
-                        </div>                        <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem' }}>
-                            <label htmlFor="descuento">Descuento:</label>
-                            <input type="number" id="descuento" name="descuento" value={formData.descuento} onChange={handleInputChange} required />
-                        </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem' }}>
-                            <label htmlFor="tipologiaProductoId">Tipologia:</label>
-                            <select id="tipologiaProductoId" value={selectedType} onChange={handleSelectChangeType}>
-                                <option value="">-- Selecciona una tipologia --</option>
-                                {types.map(type => (
-                                    <option key={type.id} value={type.id}>{type.nombre}</option>
-                                ))}
-                            </select>
-                        </div>
-                        <button type="submit" style={{ padding: '0.5rem 1rem', fontSize: '1rem', marginTop: '2rem' }}>{button}</button>
-                    </form>
+                            <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem' }}>
+                                <label htmlFor="descuento">Descuento</label>
+                                <input type="number" id="descuento" name="descuento" value={formData.descuento} onChange={handleInputChange} required style={{ padding: '0.5rem', fontSize: '1rem', borderRadius: '5px', backgroundColor: '#30365B' }}/>
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem' }}>
+                                <select id="tipologiaProductoId" value={selectedType} onChange={handleSelectChangeType} style={{ padding: '0.5rem', fontSize: '1rem', borderRadius: '5px', backgroundColor: '#30365B' }}>
+                                    <option value="">-- Selecciona una tipologia --</option>
+                                    {types.map(type => (
+                                        <option key={type.id} value={type.id}>{type.nombre}</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <button type="submit" style={{ padding: '0.5rem 1rem', fontSize: '1rem', marginTop: '2rem',  backgroundColor: '#0D6EFD' }}>{button}</button>
+                        </form>
+                    </div>
                 </div>
             </div>
             <Modal

@@ -5,12 +5,14 @@ import React, { useState, useEffect } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import error from '../../assets/error.JPG';
 import CircleBackground from '../../components/CircleBackground';
+import Modal from 'react-modal';
 
 export default function Search() {
     const location = useLocation();
     const [items, setItems] = useState([]);
     const [filteredItems, setFilteredItems] = useState([]);
     const searchText = new URLSearchParams(location.search).get('text');
+    const [setShowModal, setModalIsOpen] = useState(false);
 
     let url = "";
 
@@ -36,6 +38,30 @@ export default function Search() {
         setFilteredItems(items);
     }, [items]);
 
+    const handleBuyClick = (productId) => {
+        const storedIsLoggedIn = localStorage.getItem('isLoggedIn');
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+        const data = {
+            "usuarioId": storedIsLoggedIn,
+            "cantidad": 1,
+            "productoId": productId
+        }
+        axios
+            .post(`http://localhost:8081/api/v1/carro/anadir`, data, config)
+            .then(response => {
+                console.log(response);
+            })
+        setModalIsOpen(true);
+    };
+
+    const handleModalOk = () => {
+        setModalIsOpen(false);
+    }
+
     return (
         <div className='background'>
             <CircleBackground />
@@ -59,9 +85,12 @@ export default function Search() {
                                             <Card.Title>{item.nombre}</Card.Title>
                                             <Card.Text>{item.descripcion} ({item.deporte.nombre})</Card.Text>
                                             <Card.Text>{item.precio} €</Card.Text>
-                                            <Link to={`/products/${item.id}`} className="nav-link" style={{ marginLeft: '5%' }}>
-                                                <Button variant="primary">Comprar</Button>
-                                            </Link>
+                                            <div style={{ display: 'flex' }}>
+                                                <Link to={`/products/${item.id}`} className="nav-link" style={{ marginLeft: '5%' }}>
+                                                    <Button variant="primary">Ver</Button>
+                                                </Link>
+                                                <Button variant="primary" onClick={() => handleBuyClick(item.id)} style={{ marginLeft: '5%' }}>Comprar</Button>
+                                            </div>
                                         </Card.Body>
                                     </Card>
                                 </div>
@@ -70,6 +99,28 @@ export default function Search() {
                     </div>
                 )}
             </div>
+            <Modal
+                isOpen={setShowModal}
+                onRequestClose={() => setModalIsOpen(false)}
+                contentLabel="My Modal"
+                style={{
+                    overlay: {
+                        backgroundColor: 'rgba(0,0,0,0.5)',
+                        zIndex: 100,
+                    },
+                    content: {
+                        maxWidth: '300px',
+                        maxHeight: '150px',
+                        margin: '0 auto',
+                        marginTop: '15%'
+                    },
+                }}
+            >
+                <div>
+                    <p>Producto añadido correctamente</p>
+                    <button onClick={handleModalOk} style={{ marginLeft: '80%' }}>OK</button>
+                </div>
+            </Modal>
         </div>
     );
 }

@@ -57,12 +57,12 @@ export default function NavBar() {
             </Link>
           </li>
           <li className="nav-item flex-grow-1">
-            <Link to="/about" className="nav-link">
+            <Link to="/" className="nav-link">
               <strong>Sobre Nosotros</strong>
             </Link>
           </li>
           <li className="nav-item flex-grow-1">
-            <Link to="/contact" className="nav-link">
+            <Link to="/" className="nav-link">
               <strong>Contacto</strong>
             </Link>
           </li>

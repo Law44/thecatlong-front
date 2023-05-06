@@ -35,7 +35,7 @@ export default function User() {
             .then((response) => {
                 if (response.status == 200) {
                     setIsLoggedIn(true);
-                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('isLoggedIn', response.data.id);
                 }
             })
             .catch(error => {

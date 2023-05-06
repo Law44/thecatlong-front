@@ -5,10 +5,13 @@ import SearchProductPage from "./pages/Product/searchProduct";
 import SingleProductPage from "./pages/Product/singleProduct";
 import CreateProductPage from "./pages/Product/createProduct";
 import ListProductPage from "./pages/Product/listProduct";
-import UserPage from "./pages/User/user"
-import SignUpPage from "./pages/SignUp/signUp"
-import CreateUserPage from "./pages/User/createUser"
-import ListUserPage from "./pages/User/listUser"
+import UserPage from "./pages/User/user";
+import SignUpPage from "./pages/SignUp/signUp";
+import CreateUserPage from "./pages/User/createUser";
+import ListUserPage from "./pages/User/listUser";
+import ShoppingCartPage from "./pages/ShoppingCart/shoppingCart";
+import SportsPage from "./pages/Sports/sports";
+
 
 function App() {
   return (
@@ -24,6 +27,8 @@ function App() {
       <Route path="/user/create" element={<CreateUserPage />} />
       <Route path="/user/create/:id" element={<CreateUserPage />} />
       <Route path="/user/list" element={<ListUserPage />} />
+      <Route path="/cart" element={<ShoppingCartPage/>} />
+      <Route path="/sports" element={<SportsPage/>} />
     </Routes>
   );
 }
